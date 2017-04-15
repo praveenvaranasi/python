@@ -14,3 +14,8 @@ print("Then length of the sampleList is", len(sampleList))
 sampleList[0]=2
 print(sampleList[:])
 print(sampleList[0]+sampleList[3]);
+
+#Normal-String
+#Execute the very following line to encounter the error when running.
+#print('C:\Users\ndmin\Desktop')
+print(r'C:\Users\admin\nDesktop')
