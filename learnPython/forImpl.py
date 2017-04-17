@@ -19,4 +19,14 @@ print('\n',range(10))
 
 #w(range(5)) - Also throws Error i.e., NameError
 #The below one doesn't throw error because 'list' is predefined in Python to get intialized with iterable items.
-list(range(6))
+print(list(range(6)))
+
+
+#Implementing for loop in Python with else clause, Prints Prime Numbers.
+for n in range(2,10):
+    for x in range(2,n):
+        if n % x == 0:
+            print(n , 'is not a prime number')
+            break
+    else:
+        print(n,'is a prime number')
