@@ -1,3 +1,5 @@
+#Prime Number - The number that's only divisible by number one and itself
+
 def prime_numbers_check(limit):
     """ This function checks whether the provided Number is a prime or not"""
     i = 0
