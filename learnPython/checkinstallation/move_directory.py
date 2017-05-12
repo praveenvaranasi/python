@@ -1,8 +1,5 @@
-from .product import Check
-
-
-class Move:
-
+if __name__ == '__main__':
     import sys
-    Check.check_product_installation(sys.argv[1])
+    from .product import Check
 
+    Check.check_product_installation(sys.argv[1])

@@ -1,3 +1,7 @@
+import sys
+import os
+
+
 class Check:
 
     def check_product_installation(self):
@@ -7,8 +11,6 @@ class Check:
         This module checks whether the product Fiorano installation is existed in the Specified directory or not.
         If exists, it moves the existing installation to new folder with SOMETHING appended to newly created folder
         """
-    import sys
-    import os
     try:
         directory, installation_directory = "Fiorano",  sys.argv[1]
         os.chdir(installation_directory)
