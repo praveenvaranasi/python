@@ -37,13 +37,19 @@ class Say(Check):
     check = Check()
 
     def get_build_number(self):
+        content_string = []
+        sample = 'hello'
         try:
             print('It\'s Ok')
             file = open(Check.property_file)
             for line in file.read():
                 print(line, end="")
-                pass
+                content_string.append(line)
             file.close()
+            print(content_string, len(content_string))
+            print(content_string[-7:-2])
+            build_number = ''.join(content_string[-7:-2])
+            print(build_number + sample)
             pass
         except FileNotFoundError:
             print('The file build.properties did not exist in the specified path: ', Check.property_file)
