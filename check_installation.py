@@ -6,7 +6,6 @@ property_file = os.path.join(installation_directory, directory, str(version), "b
 
 
 def get_build_number(self):
-
     """ Gets the build number
     
         This function searches the build number in the Installation home of Fiorano and returns the build number"""
@@ -20,7 +19,7 @@ def get_build_number(self):
         file.close()
         # print(content_string[-7:-2])
         build_number = ''.join(content_string[-7:-2])
-        return directory+build_number
+        return directory + build_number
         pass
     except FileNotFoundError:
         print('The file build.properties did not exist in the specified path: ', property_file)
@@ -28,11 +27,12 @@ def get_build_number(self):
     except ValueError:
         print('hi')
         pass
+
+
 pass
 
 
 def check_product_installation(self):
-
     """Renames the Fiorano Home in the passed directory argument if exists
     
         This Function takes the directory as an argument and searches for Fiorano_home there. If Fiorano_Home exists, it
@@ -60,6 +60,8 @@ def check_product_installation(self):
         print('The Fiorano is just an directory with no Installation Files. So renaming it to FioranoOld')
         os.rename('Fiorano', 'FioranoOld')
         pass
+
+
 pass
 
 check_product_installation(sys.argv[1])
