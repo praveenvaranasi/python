@@ -24,9 +24,6 @@ def get_build_number(self):
     except FileNotFoundError:
         print('The file build.properties did not exist in the specified path: ', property_file)
         pass
-    except ValueError:
-        print('hi')
-        pass
 
 
 pass
@@ -64,4 +61,6 @@ def check_product_installation(self):
 
 pass
 
-check_product_installation(sys.argv[1])
+if __name__ == "__main__":
+    check_product_installation(sys.argv[1])
+    pass
