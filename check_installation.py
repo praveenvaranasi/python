@@ -1,7 +1,7 @@
 import os
 import sys
 
-directory, installation_directory, version = "Fiorano", sys.argv[1], 11
+directory, installation_directory, version = "Fiorano", sys.argv[1], sys.argv[2]
 property_file = os.path.join(installation_directory, directory, str(version), "build.properties")
 
 
