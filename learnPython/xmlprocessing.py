@@ -1,10 +1,14 @@
 from xml.etree import ElementTree
+import os
 
 
 def xml_processing():
     """ Parses the XML"""
 
-    xml_file = ElementTree.parse('D:\Fiorano\ForCareer\Python\python\Configs.xml')  # Parses XML File
+    path = os.getwd()
+    # path = os.chdir('../')
+    print(path)
+    xml_file = ElementTree.parse('')  # Parses XML File
     result = xml_file.getroot()  # Gets the root element
     print(result)  # Prints the tag along with the position in hexadecimal format
     print(result.tag)  # Prints the tag alone
