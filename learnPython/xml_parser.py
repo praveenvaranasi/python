@@ -18,15 +18,32 @@ def parse_xml():
 
 
 def accessing_elements():
-    """This definition shows the functionality of few methods related to xml processing"""
-    try:
+    """ This definition shows the functionality of few methods related to xml processing """
+    try:     
         xml_tree = ET.parse('Configs.xml')
-        xml_tree.getroot()
-
-        pass
+        head = xml_tree.getroot()
+        print(head, head.tag)
+        # for child in head:
+        #     print(child.tag, child.attrib)
+        # for check in head.iter('{http://fiorano.com/types/common}LOGGER'):
+        #     print(check.attrib)
+        # for get_elements in head.findall('{http://fiorano.com/types/common}LOGGER'):
+        #     print(get_elements.attrib)
+        #     print(get_elements.get('LogLevel'))
+        #     print(get_elements.get('ObjectName'))
+        logger_element = head.findall('{http://fiorano.com/types/common}LOGGER')
+        print(logger_element)
+        for logger_element_atts in logger_element:
+            print(logger_element_atts.find('{http://fiorano.com/types/common}Appender').get('AppenderName'))
+            print(logger_element_atts.find('{http://fiorano.com/types/common}Appender').get('FileName'))
     except FileNotFoundError:
         print("The file you are trying to use is not present in the specified location")
         pass
+    except AttributeError:
+        print("The attribute you're looking for is not there under the present tag. Please check and rectify")
+
+
 if __name__ == "__main__":
-    parse_xml()
+    #parse_xml()
+    accessing_elements()
     pass

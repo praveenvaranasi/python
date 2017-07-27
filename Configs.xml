@@ -18,7 +18,7 @@
                   Hostname="localhost" Protocol="udp" Port="514" Facility="local1"
                   LogPattern="!ENTRY %n[%d{dd/MMM/yyyy HH:mm:ss}] %-5p [%c{1}] %m%n"
                   MaxFilterLevel="3" MinFilterLevel="1" ThresholdLevel="10"/>
-    </LOGGER>
+        </LOGGER>
 
     <LOGGER LogLevel="3" ObjectName="Fiorano.Loggers:ServiceType=Logger,Name=Fiorano,type=config">
         <Appender AppenderName="OutAppender" AppenderType="file"
