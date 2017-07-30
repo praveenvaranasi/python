@@ -1,38 +1,44 @@
-from xml.etree import ElementTree
+import xml.etree.ElementTree as ET
+# from xml.etree.ElementTree import Element
 
 
 def microservice_resources():
     try:
-        xml_tree = ElementTree.parse("D:\Fiorano\AdditionOfJarsToEPT\OldServiceDescriptor.xml")
-        root = xml_tree.getroot()
+        xml_tree = ET.ElementTree()
+        # xml_tree = ElementTree.parse("/root/Desktop/OldServiceDescriptor.xml")
+        # root = xml_tree.getroot()
+        # print(root.tag)
+        # deployment_element = root.findall('deployment')
+        # deployment_tag = deployment_element[0].tag
+        # resources_element = deployment_element[0].findall('resources')
+        # print(resources_element[0].tag)
+        # elem = ElementTree.Element(resources_element[0].tag)
+        # sub_elem = ElementTree.SubElement(elem, 'hello')
+        # last_elem = ElementTree.dump(elem)
+        # print(sub_elem)
+        # ElementTree.dump(xml_tree)
+        # task = ElementTree.Element(resources_element[0].tag)
+        # trying = ElementTree.SubElement(task, 'hello')
+        # xml_tree.ElementTree.write("/root/Desktop/Outputfinal")
 
-        print(root,root.tag)
-        deployment_element = root.findall('deployment')
-        print(deployment_element)
-        resources = deployment_element[0].tag
-        print(resources)
-        if resources == "deployment":
-            print('Finally, you did it dude')
-        for final_check in deployment_element[0]:
-            print(final_check.tag, final_check.attrib)
+        tree = ET.parse('/root/Desktop/OldServiceDescriptor.xml')
+        # tree.parse("/root/Desktop/OldServiceDescriptor.xml")
+        root = tree.getroot()
+        deployment_elem = (root.findall('deployment'))[0]
+        resources_elem = (deployment_elem.findall('resources'))[0]
+        print(resources_elem)
+        resources_elem.set('updated', 'yes')
+        elem = ET.Element(resources_elem)
+        sub_elem = ET.SubElement(elem, 'resource')
+        # tree.write('/root/Desktop/Outputshow.xml')
+        # root.insert([4][0], sub_elem)
+        root.insert(resources_elem, sub_elem)
+        tree.write('/root/Desktop/Outputshow.xml')
 
-        # substitute to the above block of code
-        # Nested for loops retrieve all the elements, sub-elements, sub-sub-elements of the 'deployment' tag
-        # for atts in root.findall('deployment'):
-        #     print(atts.tag, atts.attrib)
-        #     print(atts.get('label'))
-        #     for sub_atts in atts.findall('resources'):
-        #         print(sub_atts.tag)
-        #         for sub_sub_atts in sub_atts.findall('resource'):
-        #             print(sub_sub_atts.tag)
 
-        # process of directly accessing elements from an xml tree
-        # for attributes in root.iter('resource'):
-        #     print(attributes.tag, attributes.attrib)
-
-    except AttributeError:
-        print('The attribute you are looking for is not appearing here')
-
+    except TypeError:
+        # print('The attribute you are looking for is not appearing here')
+        pass
 if __name__ == "__main__":
     microservice_resources()
     pass
