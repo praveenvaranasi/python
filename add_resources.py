@@ -11,14 +11,12 @@ def microservice_resources(src_file, dest_file, element, sub_element, sub_elemen
         for resultant_element in root.iter():
             if element == resultant_element.tag:
                 base_element = ET.Element(resultant_element)
-                print(base_element)
                 for temp in attribute_values:
-                    print(temp)
                     sub_base_element = ET.SubElement(base_element, sub_element)
                     sub_base_element.set(sub_element_attribute, temp)
-                    sub_base_element.tail = "\n"
+                    sub_base_element.tail = "\n\t\t\t"
                     resultant_element.insert(0, sub_base_element)
-                    print('added '+sub_element_attribute+' attribute with value '+temp+' to the '+resultant_element.tag+' element')
+                    print('added '+sub_element_attribute+' attribute with value '+temp+' to the '+sub_element+' element under the '+resultant_element.tag)
         tree.write(dest_file)
 
     except AttributeError:
@@ -27,6 +25,8 @@ def microservice_resources(src_file, dest_file, element, sub_element, sub_elemen
         print('The file '+src_file+' is not present in the specified location')
     except ET.ParseError:
         print('The file '+src_file+' is a malformed xml')
+    except IsADirectoryError:
+        print('The parameter source file '+src_file+' passed is a directory. It has to be an xml file' )
 
 if __name__ == "__main__":
     source_file = sys.argv[1]
