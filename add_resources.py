@@ -1,24 +1,39 @@
 import xml.etree.ElementTree as ET
+import sys
+from sys import argv
 
 
-def microservice_resources():
+def microservice_resources(src_file, dest_file, element, sub_element, sub_element_attribute, *attribute_values):
     """ The module adds resources"""
     try:
-        tree = ET.parse('/root/Desktop/installed/ServiceDescriptor.xml')
+        tree = ET.parse(src_file)
         root = tree.getroot()
-        deployment_elem = (root.findall('deployment'))[0]
-        resources_elem = (deployment_elem.findall('resources'))[0]
-        elem = ET.Element(resources_elem)
-        sub_elem = ET.SubElement(elem, 'resource')
-        sub_elem.set('name', 'postgresql-9.1-901.jdbc3.jar')
-        resources_elem.insert(0, sub_elem)
-        tree.write('/root/Desktop/installed/Fiorano/11/runtimedata/repository/components/jdbc/4.0/ServiceDescriptor.xml')
+        for resultant_element in root.iter():
+            if element == resultant_element.tag:
+                base_element = ET.Element(resultant_element)
+                print(base_element)
+                for temp in attribute_values:
+                    print(temp)
+                    sub_base_element = ET.SubElement(base_element, sub_element)
+                    sub_base_element.set(sub_element_attribute, temp)
+                    sub_base_element.tail = "\n"
+                    resultant_element.insert(0, sub_base_element)
+                    print('added '+sub_element_attribute+' attribute with value '+temp+' to the '+resultant_element.tag+' element')
+        tree.write(dest_file)
 
     except AttributeError:
         print('The attribute you are looking for is not appearing here')
     except FileNotFoundError:
-        print('The file is not present in the specified location')
+        print('The file '+src_file+' is not present in the specified location')
+    except ET.ParseError:
+        print('The file '+src_file+' is a malformed xml')
 
 if __name__ == "__main__":
-    microservice_resources()
+    source_file = sys.argv[1]
+    destination_file = sys.argv[2]
+    elem = sys.argv[3]
+    sub_elem = sys.argv[4]
+    attribute_name = sys.argv[5]
+    print(source_file, destination_file, elem, sub_elem, attribute_name, *argv[6:])
+    microservice_resources(source_file, destination_file, elem, sub_elem, attribute_name, *argv[6:])
     pass

@@ -1,3 +1,6 @@
+import sys
+from sys import argv
+
 def check_build_number():
 
     build = input("Enter the build number:\n")
@@ -20,8 +23,14 @@ def copy_jars():
     import sys
     #os.
 
+def unpack(*jars):
+    for i in range(0, jars.__len__()):
+        print(i)
+
+
 if __name__ == "__main__":
 
-    check = check_build_number  # Renaming mechanism of the function
-    check()
+    # check = check_build_number  # Renaming mechanism of the function
+    # check()
+    unpack(*argv[1:])
     pass
