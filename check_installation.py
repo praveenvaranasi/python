@@ -2,7 +2,7 @@ import os
 import sys
 import xml.etree.ElementTree as ET
 
-directory, installation_directory, version = "Fiorano", sys.argv[1], 11
+directory, installation_directory, version, java_home = "Fiorano", sys.argv[2], 11, sys.argv[3]
 property_file = os.path.join(installation_directory, directory, str(version), "build.properties")
 
 
@@ -60,18 +60,27 @@ def check_product_installation(self):
         pass
 pass
 
-def set_java_home():
-    "Sets the java_home in the Info.plist file"
-    # infoplist_file = installation_directory
-    ex_list=[ installation_directory, str(version), 'eStudio', 'eStudio.app', 'Contents','Info.plist']
-    infoplist_file_path = '\\'.join(ex_list)
-    print(infoplist_file_path)
-    tree = ET.parse("C:\\Users\\praveen\\Desktop\\Fiorano\\11\\eStudio\\eStudio.app\\Contents\\Info.plist")
-    print(tree.getroot())
 
+def set_java_home(self):
+    "Sets the java_home in the Info.plist file"
+
+    ex_list=[ installation_directory, directory, str(version), 'eStudio', 'eStudio.app', 'Contents','Info.plist']
+    infoplist_file_path = '/'.join(ex_list)
+    tree = ET.parse(infoplist_file_path)
+    root = tree.getroot()
+    for child in root.iter():
+        if child.text == "%JAVA_HOME%":
+            temp = child.tag
+            child.text = java_home
+            print("Set the "+java_home+" as JAVA_HOME for eStudio inside ")
+            tree.write(infoplist_file_path)
 
 
 if __name__ == "__main__":
-    # check_product_installation(sys.argv[1])
-    set_java_home()
-    pass
+    run = sys.argv[1]
+    if run == "check":
+        check_product_installation(sys.argv[2])
+    elif run == "update":
+        set_java_home(sys.argv[3])
+    else:
+         print("Invalid Parameter. Pass 'check' or 'update'")
