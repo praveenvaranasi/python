@@ -1,7 +1,8 @@
 import os
 import sys
+import xml.etree.ElementTree as ET
 
-directory, installation_directory, version = "Fiorano", sys.argv[1], sys.argv[2]
+directory, installation_directory, version = "Fiorano", sys.argv[1], 11
 property_file = os.path.join(installation_directory, directory, str(version), "build.properties")
 
 
@@ -57,10 +58,20 @@ def check_product_installation(self):
         print('The Fiorano is just an directory with no Installation Files. So renaming it to FioranoOld')
         os.rename('Fiorano', 'FioranoOld')
         pass
-
-
 pass
 
+def set_java_home():
+    "Sets the java_home in the Info.plist file"
+    # infoplist_file = installation_directory
+    ex_list=[ installation_directory, str(version), 'eStudio', 'eStudio.app', 'Contents','Info.plist']
+    infoplist_file_path = '\\'.join(ex_list)
+    print(infoplist_file_path)
+    tree = ET.parse("C:\\Users\\praveen\\Desktop\\Fiorano\\11\\eStudio\\eStudio.app\\Contents\\Info.plist")
+    print(tree.getroot())
+
+
+
 if __name__ == "__main__":
-    check_product_installation(sys.argv[1])
+    # check_product_installation(sys.argv[1])
+    set_java_home()
     pass
